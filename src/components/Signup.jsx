@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import { useNavigate ,Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import {
   Grid,
   Paper,
@@ -10,7 +10,6 @@ import {
   Box,
 } from "@mui/material";
 
-
 const Signup = (props) => {
   const paperStyle = {
     padding: 20,
@@ -20,9 +19,14 @@ const Signup = (props) => {
   };
   const avatarStyle = { backgroundColor: "#398AB9" };
   const btnstyle = { margin: "8px 0" };
-  const host = 'https://epistle-server.herokuapp.com';
+  const host = "https://epistle-server.herokuapp.com";
 
-  const [credentials, setCredentials] = useState({name:'', email: "", password: "",cpassword: "" });
+  const [credentials, setCredentials] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
   let navigate = useNavigate();
 
   const onChange = (e) => {
@@ -30,33 +34,30 @@ const Signup = (props) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const {name,email,password,cpassword} = credentials;
+    const { name, email, password, cpassword } = credentials;
     const response = await fetch(`${host}/api/auth/createuser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,email,password,cpassword
+        name,
+        email,
+        password,
+        cpassword,
       }),
     });
     const json = await response.json();
-      //save the auth token and redirect
-      if(json.success)
-      {
-        console.log(json);
-        localStorage.setItem("token", json.authToken);
-        navigate("/");
-        props.showAlert("Account created successfully","success");
-      }
-      else
-      {
-        props.showAlert("Invalid cred","warning");
-      }
-
+    //save the auth token and redirect
+    if (json.success) {
+      localStorage.setItem("token", json.authToken);
+      navigate("/");
+      props.showAlert("Account created successfully", "success");
+    } else {
+      props.showAlert("Invalid cred", "warning");
+    }
   };
   return (
     <Grid>
@@ -91,7 +92,7 @@ const Signup = (props) => {
               fullWidth
               name="email"
               onChange={onChange}
-              type='email'
+              type="email"
             />
             <Input
               sx={{ marginBottom: "1rem" }}
@@ -101,7 +102,7 @@ const Signup = (props) => {
               onChange={onChange}
               required
               type="password"
-            
+              autoComplete="true"
             />
             <Input
               placeholder="Confirm Password"
@@ -110,6 +111,7 @@ const Signup = (props) => {
               onChange={onChange}
               required
               type="password"
+              autoComplete="true"
             />
             <Button
               type="submit"

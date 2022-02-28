@@ -31,7 +31,7 @@ function Navbar() {
           alignItems: "center",
         }}
       >
-        <h1>inotebook</h1>
+        <h1>EPISTLE</h1>
         <Link to={"/"}>
           <Button
             sx={{ marginLeft: "1rem" }}

@@ -17,13 +17,16 @@ function AddNote() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (note.title === "" || note.description === "" || note.tag === "") {
+      alert("fill the fields");
+      return;
+    }
     addNote(note.title, note.description, note.tag);
     setNote({
       title: "",
       description: "",
       tag: "",
     });
-    
   };
   return (
     <Box
@@ -35,13 +38,16 @@ function AddNote() {
       }}
     >
       <h1>ADD A NOTE</h1>
-      <Box
-        sx={{
+
+      <form
+        style={{
           display: "flex",
           flexDirection: "column",
           rowGap: "1rem",
           width: "30%",
+          alignItems:'center'
         }}
+        onSubmit={handleSubmit}
       >
         <TextField
           onChange={onChange}
@@ -49,6 +55,7 @@ function AddNote() {
           id="title"
           label="Title"
           variant="outlined"
+          fullWidth
           value={note.title}
         />
         <TextField
@@ -58,6 +65,7 @@ function AddNote() {
           label="Tag"
           variant="outlined"
           value={note.tag}
+          fullWidth
         />
         <TextField
           onChange={onChange}
@@ -67,12 +75,12 @@ function AddNote() {
           value={note.description}
           multiline
           rows={10}
+          fullWidth
         />
-      </Box>
-      <br />
-      <Button onClick={handleSubmit} variant="outlined" type="submit">
-        Add
-      </Button>
+        <Button sx={{width:'5rem'}} variant="outlined" type="submit">
+          Add
+        </Button>
+      </form>
     </Box>
   );
 }
