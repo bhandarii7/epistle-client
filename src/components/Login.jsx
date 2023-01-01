@@ -24,7 +24,7 @@ const Login = (props) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
-  const host = 'https://epistle-server.herokuapp.com';
+  const host = 'https://epistle-server.onrender.com';
 
 
   const onChange = (e) => {

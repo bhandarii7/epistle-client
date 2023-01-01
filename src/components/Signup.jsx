@@ -19,7 +19,7 @@ const Signup = (props) => {
   };
   const avatarStyle = { backgroundColor: "#398AB9" };
   const btnstyle = { margin: "8px 0" };
-  const host = "https://epistle-server.herokuapp.com";
+  const host = "https://epistle-server.onrender.com";
 
   const [credentials, setCredentials] = useState({
     name: "",
